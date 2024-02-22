@@ -63,9 +63,10 @@ nav .circle i {
 /* Estilos para o título da música e o artista */
 h1, p {
     font-family: 'Poppins', sans-serif;
-    font-size: 24px;
+    font-size: 20px;
     color: #333;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    margin-top: 1px;
 }
 
 /* Estilos para a barra de progresso e volume */
@@ -83,8 +84,8 @@ input[type="range"] {
 input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 12px;
-    height: 12px;
+    width: 18px;
+    height: 18px;
     border-radius: 50%;
     cursor: pointer;
 }
@@ -97,7 +98,7 @@ input[type="range"]::-webkit-slider-thumb {
     background: linear-gradient(to right, #ddd 0%, #ddd 100%);
     border-radius: 5px;
     outline: none;
-    margin: 0 auto;
+    margin: 1% auto;
     position: relative;
 }
 
@@ -142,9 +143,19 @@ input[type="range"]::-webkit-slider-thumb {
     width: 60px;
 }
 
-/* Media query para smartphones */
-@media only screen and (max-width: 768px) {
-    .music-player {
-        width: 90%; /* Ajusta a largura para ocupar 90% da tela */
-    }
+/* Estilo para o texto da porcentagem do volume */
+.volume-value {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: #333;
+    position: absolute;
+    top: -25px;
+    pointer-events: none;
+    opacity: 0; /* Inicialmente, o texto estará invisível */
+    transition: opacity 0.3s ease; /* Adiciona uma transição suave */
+}
+
+/* Estilo para exibir o texto da porcentagem do volume apenas quando o mouse está sobre a barra de volume */
+.volume:hover .volume-value {
+    opacity: 1; /* Torna o texto visível quando o mouse está sobre a barra de volume */
 }

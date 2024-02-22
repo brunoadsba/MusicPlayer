@@ -27,13 +27,13 @@
             </div>
             <div class="controls-volume">
                 <div class="controls">
-                    <div><i class="fa-solid fa-backward"></i></div>
+                    <div onclick="backward()"><i class="fa-solid fa-backward"></i></div>
                     <div onclick="playPause()"><i class="fa-solid fa-play" id="ctrlIcon"></i></div>
-                    <div><i class="fa-solid fa-forward"></i></div>
+                    <div onclick="forward()"><i class="fa-solid fa-forward"></i></div>
                 </div>
                 <div class="volume">
-                    <input type="range" min="0" max="1" step="0.01" value="1" id="volume" class="volume-slider">
-                    <div id="volume-display">100%</div>
+                    <input type="range" min="0" max="1" step="0.01" value="0.5" id="volume" class="volume-slider">
+                    <div id="volume-display" class="volume-value">50%</div>
                 </div>
             </div>
         </div>
@@ -72,6 +72,11 @@
         updateTimes();
     }
 
+    song.onended = function() {
+        ctrlIcon.classList.remove("fa-pause");
+        ctrlIcon.classList.add("fa-play");
+    }
+
     function playPause(){
         if(ctrlIcon.classList.contains("fa-pause")){
             song.pause();
@@ -80,6 +85,7 @@
             ctrlIcon.classList.add("fa-play");
         }
         else{
+            song.volume = volume.value;
             song.play();
             intervalId = setInterval(()=>{
                 updateTimes();
@@ -87,6 +93,16 @@
             ctrlIcon.classList.add("fa-pause");
             ctrlIcon.classList.remove("fa-play");
         }
+    }
+
+    function backward() {
+        song.currentTime -= 5; // Retrocede 5 segundos
+        updateTimes();
+    }
+
+    function forward() {
+        song.currentTime += 5; // Avança 5 segundos
+        updateTimes();
     }
 
     volume.oninput = function() {
@@ -100,6 +116,9 @@
         volumeSlider.style.background = 'linear-gradient(to right, #ddd 0%, #ddd ' + value + '%, #333 ' + value + '%, #333 100%)';
         let volumePercentage = Math.round(volume.value * 100);
         volumeDisplay.textContent = volumePercentage + "%";
+        let thumbSize = 12; // Tamanho do indicador
+        let position = value / 100 * (volumeSlider.offsetWidth - thumbSize) + thumbSize / 2;
+        volumeDisplay.style.left = 'calc(' + value + '% - ' + (thumbSize / 2) + 'px)';
     }
 </script>
 
