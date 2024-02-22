@@ -1,15 +1,15 @@
 /* Importando a fonte Poppins do Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
-/* Definindo estilos gerais para resetar margens, preenchimentos e caixas */
-*{
+/* Estilos gerais para resetar margens, preenchimentos e caixas */
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
 /* Estilos para o container principal */
-.container{
+.container {
     width: 100%;
     height: 100vh;
     background: #333;
@@ -20,7 +20,7 @@
 }
 
 /* Estilos para o player de música */
-.music-player{
+.music-player {
     background: #ffe0e5;
     width: 400px;
     padding: 25px 35px;
@@ -28,14 +28,14 @@
 }
 
 /* Estilos para a barra de navegação */
-nav{
+nav {
     display: flex;
     justify-content: space-between;
     margin-bottom: 30px;
 }
 
 /* Estilos para os círculos na barra de navegação */
-nav .circle{
+nav .circle {
     width: 40px;
     height: 40px;
     background: #fff;
@@ -47,37 +47,29 @@ nav .circle{
 }
 
 /* Estilos para os ícones na barra de navegação */
-nav .circle i{
+nav .circle i {
     color: #333;
     font-size: 20px;
 }
 
 /* Estilos para a imagem da música */
-.song-img{
+.song-img {
     width: 250px;
     height: 250px;
     margin-bottom: 20px;
     border-radius: 50%;
 }
 
-/* Estilos para o título da música */
-h1{
+/* Estilos para o título da música e o artista */
+h1, p {
     font-family: 'Poppins', sans-serif;
     font-size: 24px;
     color: #333;
     margin-bottom: 10px;
 }
 
-/* Estilos para o artista */
-p{
-    font-family: 'Poppins', sans-serif;
-    font-size: 16px;
-    color: #666;
-    margin-bottom: 20px;
-}
-
-/* Estilos para a barra de progresso */
-input[type="range"]{
+/* Estilos para a barra de progresso e volume */
+input[type="range"] {
     width: 100%;
     -webkit-appearance: none;
     background: #ddd;
@@ -87,77 +79,49 @@ input[type="range"]{
     margin-bottom: 20px;
 }
 
-/* Estilos para a barra de progresso enquanto arrasta */
-input[type="range"]::-webkit-slider-thumb{
+/* Estilos para a barra de progresso e volume enquanto arrasta */
+input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
     width: 12px;
     height: 12px;
-    background: #333;
     border-radius: 50%;
     cursor: pointer;
 }
 
-/* Estilos para o volume */
-.volume{
-    display: flex;
-    flex-direction: center;
-    align-items:center;
-    margin-top: 5px;
-}
-
-.volume p{
-    font-family: 'Poppins', sans-serif;
-    font-size: 16px;
-    color: #666;
-    margin-right: 70px;
-
-}
-
 /* Estilos para a barra de volume */
 .volume input[type="range"] {
-    width: 70%; /* Define a largura inicial da barra de volume */
-    max-width: 300px; /* Define a largura máxima da barra de volume */
+    width: 70%;
+    max-width: 300px;
     height: 15px;
-    -webkit-appearance: none;
     background: linear-gradient(to right, #ddd 0%, #ddd 100%);
     border-radius: 5px;
     outline: none;
-    margin: 0 auto; /* Centraliza horizontalmente */
-    position: relative; /* Adiciona posição relativa para o container */
+    margin: 0 auto;
+    position: relative;
 }
-
-
-
 
 /* Estilo para preenchimento gradativo da barra de volume */
 .volume input[type="range"]::-webkit-slider-runnable-track {
     height: 10px;
-    -webkit-appearance: none;
     background: linear-gradient(to right, #ddd 0%, #ddd 100%);
     border-radius: 5px;
 }
 
 /* Estilo para preenchimento da barra de volume quando arrastada */
 .volume input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 16px;
-    height: 16px;
     background: #FF5733;
-    border-radius: 50%;
-    cursor: pointer;
 }
 
 /* Estilos para os controles do player de música */
-.controls{
+.controls {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 /* Estilos para os botões de controle */
-.controls div{
+.controls div {
     width: 40px;
     height: 40px;
     background: #ddd;
@@ -174,6 +138,13 @@ input[type="range"]::-webkit-slider-thumb{
     font-family: 'Poppins', sans-serif;
     font-size: 16px;
     color: #666;
-    display: inline-block; /* Alinha horizontalmente */
-    width: 60px; /* Ajuste a largura conforme necessário */
+    display: inline-block;
+    width: 60px;
+}
+
+/* Media query para smartphones */
+@media only screen and (max-width: 768px) {
+    .music-player {
+        width: 90%; /* Ajusta a largura para ocupar 90% da tela */
+    }
 }

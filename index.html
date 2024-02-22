@@ -4,72 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Music Player</title>
-    <!-- Importa o arquivo de estilo CSS -->
     <link rel="stylesheet" href="style.css">
-    <!-- Importa o script do Font Awesome -->
     <script src="https://kit.fontawesome.com/ed8e09ef69.js" crossorigin="anonymous"></script>
 </head>
 <body>
     
-    <div class="container">
-        <!-- Container principal -->
-        <div class="music-player">
-            <!-- Reprodutor de música -->
-            <nav>
-                <!-- Barra de navegação -->
-                <div class="circle">
-                    <!-- Ícone de voltar -->
-                    <i class="fa-solid fa-angle-left"></i>
+<div class="container">
+    <div class="music-player">
+        <nav>
+            <div class="circle">
+                <i class="fa-solid fa-angle-left"></i>
+            </div>
+            <div class="circle">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </nav>
+        <div class="content">
+            <div class="song-info">
+                <img src="img/guitar.png" class="song-img">
+                <h1>World, Hold On</h1>
+                <p>Bob Sinclair</p>
+            </div>
+            <div class="controls-volume">
+                <div class="controls">
+                    <div><i class="fa-solid fa-backward"></i></div>
+                    <div onclick="playPause()"><i class="fa-solid fa-play" id="ctrlIcon"></i></div>
+                    <div><i class="fa-solid fa-forward"></i></div>
                 </div>
-                <div class="circle">
-                    <!-- Ícone de menu -->
-                    <i class="fa-solid fa-bars"></i>
-                </div>
-            </nav>
-            <!-- Conteúdo do reprodutor de música -->
-            <div class="content">
-                <!-- Informações da música -->
-                <div class="song-info">
-                    <!-- Imagem da música -->
-                    <img src="img/guitar.png" class="song-img">
-                    <!-- Título da música -->
-                    <h1>World, Hold On</h1>
-                    <!-- Artista -->
-                    <p>Bob Sinclair</p>
-                </div>
-                <!-- Controles e barra de volume -->
-                <div class="controls-volume">
-                    <!-- Controles do player de música -->
-                    <div class="controls">
-                        <!-- Botão de retroceder -->
-                        <div><i class="fa-solid fa-backward"></i></div>
-                        <!-- Botão de reproduzir/pausar -->
-                        <div onclick="playPause()"><i class="fa-solid fa-play" id="ctrlIcon"></i></div>
-                        <!-- Botão de avançar -->
-                        <div><i class="fa-solid fa-forward"></i></div>
-                    </div>
-                    <!-- Barra de volume -->
-                    <div class="volume">
-                        <input type="range" min="0" max="1" step="0.01" value="1" id="volume" class="volume-slider">
-                        <!-- Exibição do volume em porcentagem -->
-                        <div id="volume-display">100%</div>
-                    </div>
+                <div class="volume">
+                    <input type="range" min="0" max="1" step="0.01" value="1" id="volume" class="volume-slider">
+                    <div id="volume-display">100%</div>
                 </div>
             </div>
-            <!-- Elemento de áudio -->
-            <audio id="song">
-                <!-- Fonte da música -->
-                <source src="img/sinclair.mp4" type="audio/mpeg">
-            </audio>
-            <!-- Elemento para exibir o tempo inicial da música -->
-            <div id="start-time" class="time">0:00</div>
-            <!-- Elemento para exibir o tempo final da música -->
-            <div id="end-time" class="time">0:00</div>
         </div>
+        <audio id="song">
+            <source src="img/sinclair.mp4" type="audio/mpeg">
+        </audio>
+        <div id="start-time" class="time">0:00</div>
+        <div id="end-time" class="time">0:00</div>
     </div>
+</div>
 
 <script>
-    // Seleciona elementos do DOM
     let volume = document.getElementById("volume");
     let song = document.getElementById("song");
     let ctrlIcon = document.getElementById("ctrlIcon");
@@ -78,7 +54,6 @@
     let endTime = document.getElementById("end-time");
     let intervalId;
 
-    // Função para formatar o tempo em minutos e segundos
     function formatTime(time) {
         const minutes = Math.floor(time / 60);
         let seconds = Math.floor(time % 60);
@@ -86,24 +61,21 @@
         return minutes + ':' + seconds;
     }
 
-    // Função para atualizar os tempos inicial e final da música
     function updateTimes() {
         startTime.textContent = formatTime(song.currentTime);
         endTime.textContent = formatTime(song.duration);
     }
 
-    // Define o máximo e o valor inicial da barra de volume
     song.onloadedmetadata = function(){
         volume.value = song.volume;
         updateVolumeDisplay();
         updateTimes();
     }
 
-    // Função para reproduzir ou pausar a música
     function playPause(){
         if(ctrlIcon.classList.contains("fa-pause")){
             song.pause();
-            clearInterval(intervalId); // Limpa o intervalo de atualização da barra de progresso
+            clearInterval(intervalId);
             ctrlIcon.classList.remove("fa-pause");
             ctrlIcon.classList.add("fa-play");
         }
@@ -117,28 +89,17 @@
         }
     }
 
-    // Evento de alteração no volume
     volume.oninput = function() {
         song.volume = volume.value;
         updateVolumeDisplay();
     }
 
-    // Função para atualizar o estilo da barra de volume
     function updateVolumeDisplay() {
         let volumeSlider = document.querySelector('.volume-slider');
         let value = (volumeSlider.value - volumeSlider.min) / (volumeSlider.max - volumeSlider.min) * 100;
         volumeSlider.style.background = 'linear-gradient(to right, #ddd 0%, #ddd ' + value + '%, #333 ' + value + '%, #333 100%)';
         let volumePercentage = Math.round(volume.value * 100);
         volumeDisplay.textContent = volumePercentage + "%";
-    }
-
-    // Função para diminuir o volume
-    function decreaseVolume() {
-        if (parseFloat(volume.value) > 0) {
-            volume.value = (parseFloat(volume.value) - 0.1).toFixed(2); // Diminui o volume em 0.1 (de 0 a 1)
-            song.volume = volume.value;
-            updateVolumeDisplay();
-        }
     }
 </script>
 
