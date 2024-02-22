@@ -144,21 +144,9 @@ input[type="range"]::-webkit-slider-thumb{
     appearance: none;
     width: 16px;
     height: 16px;
-    background: #333;
+    background: #FF57333;
     border-radius: 50%;
     cursor: pointer;
-}
-
-/* Estilos para a exibição do volume em porcentagem */
-#volume-display {
-    font-family: 'Poppins', sans-serif;
-    font-size: 14px;
-    color: #333;
-    margin-bottom: 10px;
-    position: absolute; /* Define posição absoluta para o elemento */
-    bottom: 100%; /* Posiciona o elemento acima da barra de volume */
-    left: 50%; /* Posiciona o elemento no meio da barra de volume */
-    transform: translateX(-50%); /* Centraliza horizontalmente */
 }
 
 /* Estilos para os controles do player de música */
@@ -181,8 +169,11 @@ input[type="range"]::-webkit-slider-thumb{
     cursor: pointer;
 }
 
-/* Estilos para os ícones nos botões de controle */
-.controls div i{
-    color: #333;
-    font-size: 18px;
+/* Estilos para o tempo inicial e final da música */
+.time {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    color: #666;
+    display: inline-block; /* Alinha horizontalmente */
+    width: 60px; /* Ajuste a largura conforme necessário */
 }

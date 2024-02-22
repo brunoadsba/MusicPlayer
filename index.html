@@ -53,14 +53,6 @@
                         <input type="range" min="0" max="1" step="0.01" value="1" id="volume" class="volume-slider">
                         <!-- Exibição do volume em porcentagem -->
                         <div id="volume-display">100%</div>
-                        <p>vol</p>
-                    </div>
-                    <!-- Botões de aumentar e diminuir o volume -->
-                    <div class="volume-buttons">
-                        <!-- Botão de diminuir o volume -->
-                        <div><i class="fa-solid fa-volume-down" onclick="decreaseVolume()"></i></div>
-                        <!-- Botão de aumentar o volume -->
-                        <div><i class="fa-solid fa-volume-up" onclick="increaseVolume()"></i></div>
                     </div>
                 </div>
             </div>
@@ -71,8 +63,6 @@
             </audio>
             <!-- Elemento para exibir o tempo inicial da música -->
             <div id="start-time" class="time">0:00</div>
-            <!-- Barra de progresso -->
-            <input type="range" value="0" id="progress">
             <!-- Elemento para exibir o tempo final da música -->
             <div id="end-time" class="time">0:00</div>
         </div>
@@ -80,7 +70,6 @@
 
 <script>
     // Seleciona elementos do DOM
-    let progress = document.getElementById("progress");
     let volume = document.getElementById("volume");
     let song = document.getElementById("song");
     let ctrlIcon = document.getElementById("ctrlIcon");
@@ -103,10 +92,10 @@
         endTime.textContent = formatTime(song.duration);
     }
 
-    // Define o máximo e o valor inicial da barra de progresso
+    // Define o máximo e o valor inicial da barra de volume
     song.onloadedmetadata = function(){
-        progress.max = song.duration;
-        progress.value = song.currentTime;
+        volume.value = song.volume;
+        updateVolumeDisplay();
         updateTimes();
     }
 
@@ -121,7 +110,6 @@
         else{
             song.play();
             intervalId = setInterval(()=>{
-                progress.value = song.currentTime;
                 updateTimes();
             },500);
             ctrlIcon.classList.add("fa-pause");
@@ -129,37 +117,19 @@
         }
     }
 
-    // Evento de alteração na barra de progresso
-    progress.onchange = function(){
-        if (!song.paused) { // Verifica se a música está sendo reproduzida
-            song.currentTime = progress.value;
-            updateTimes();
-        }
-    }
-
-    // Função para atualizar o volume da música
+    // Evento de alteração no volume
     volume.oninput = function() {
         song.volume = volume.value;
         updateVolumeDisplay();
     }
 
- // Função para atualizar o estilo da barra de volume
-function updateVolumeDisplay() {
-    let volumeSlider = document.querySelector('.volume-slider');
-    let value = (volumeSlider.value - volumeSlider.min) / (volumeSlider.max - volumeSlider.min) * 100;
-    volumeSlider.style.background = 'linear-gradient(to right, #ddd 0%, #ddd ' + value + '%, #333 ' + value + '%, #333 100%)';
-    let volumePercentage = Math.round(volume.value * 100);
-    volumeDisplay.textContent = volumePercentage + "%";
-}
-
-
-    // Função para aumentar o volume
-    function increaseVolume() {
-        if (parseFloat(volume.value) < 1) {
-            volume.value = (parseFloat(volume.value) + 0.1).toFixed(2); // Aumenta o volume em 0.1 (de 0 a 1)
-            song.volume = volume.value;
-            updateVolumeDisplay();
-        }
+    // Função para atualizar o estilo da barra de volume
+    function updateVolumeDisplay() {
+        let volumeSlider = document.querySelector('.volume-slider');
+        let value = (volumeSlider.value - volumeSlider.min) / (volumeSlider.max - volumeSlider.min) * 100;
+        volumeSlider.style.background = 'linear-gradient(to right, #ddd 0%, #ddd ' + value + '%, #333 ' + value + '%, #333 100%)';
+        let volumePercentage = Math.round(volume.value * 100);
+        volumeDisplay.textContent = volumePercentage + "%";
     }
 
     // Função para diminuir o volume
