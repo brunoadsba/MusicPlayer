@@ -22,8 +22,9 @@
 /* Estilos para o player de música */
 .music-player {
     background: #ffe0e5;
-    width: 400px;
-    padding: 25px 35px;
+    width: 90%; /* Alterado para ocupar 90% da largura */
+    max-width: 400px; /* Limitado a 400px */
+    padding: 25px;
     text-align: center;
 }
 
@@ -31,13 +32,13 @@
 nav {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 30px;
+    margin-bottom: 20px; /* Reduzido o espaçamento */
 }
 
 /* Estilos para os círculos na barra de navegação */
 nav .circle {
-    width: 40px;
-    height: 40px;
+    width: 30px; /* Reduzido o tamanho */
+    height: 30px; /* Reduzido o tamanho */
     background: #fff;
     border-radius: 50%;
     display: flex;
@@ -49,24 +50,39 @@ nav .circle {
 /* Estilos para os ícones na barra de navegação */
 nav .circle i {
     color: #333;
-    font-size: 20px;
+    font-size: 16px; /* Reduzido o tamanho */
 }
 
 /* Estilos para a imagem da música */
 .song-img {
-    width: 250px;
-    height: 250px;
+    width: 100%; /* Alterado para ocupar 100% da largura */
+    max-width: 250px; /* Limitado a 250px */
+    height: auto; /* Altura automática */
     margin-bottom: 20px;
     border-radius: 50%;
+    box-shadow: 0 0 20px 5px #fff, 0 0 100px 15px #ff00ff, 0 0 10px 5px #ff00ff, 0 0 5px 5px #ff00ff;
+}
+
+@keyframes pulse-neon {
+    5% {
+        box-shadow: 0 0 10px 2px #fff, 0 0 50px 8px #ff00ff, 0 0 5px 2px #ff00ff, 0 0 2px 2px #ff00ff;
+    }
+    20% {
+        box-shadow: 0 0 15px 2px #fff, 0 0 30px 8px #ff00ff, 0 0 45px 15px #ff00ff, 0 0 40px 25px #ff00ff;
+    }
+}
+
+/* Estilo da animação para a classe pulse-animation */
+.pulse-animation {
+    animation: pulse-neon 1s infinite alternate;
 }
 
 /* Estilos para o título da música e o artista */
 h1, p {
     font-family: 'Poppins', sans-serif;
-    font-size: 20px;
+    font-size: 18px; /* Reduzido o tamanho */
     color: #333;
-    margin-bottom: 15px;
-    margin-top: 1px;
+    margin-bottom: 10px; /* Reduzido o espaçamento */
 }
 
 /* Estilos para a barra de progresso e volume */
@@ -77,7 +93,7 @@ input[type="range"] {
     height: 5px;
     border-radius: 5px;
     outline: none;
-    margin-bottom: 20px;
+    margin-bottom: 15px; /* Reduzido o espaçamento */
 }
 
 /* Estilos para a barra de progresso e volume enquanto arrasta */
@@ -93,8 +109,8 @@ input[type="range"]::-webkit-slider-thumb {
 /* Estilos para a barra de volume */
 .volume input[type="range"] {
     width: 70%;
-    max-width: 300px;
-    height: 15px;
+    max-width: 250px; /* Limitado a 250px */
+    height: 10px; /* Ajustado a altura */
     background: linear-gradient(to right, #ddd 0%, #ddd 100%);
     border-radius: 5px;
     outline: none;
@@ -104,7 +120,7 @@ input[type="range"]::-webkit-slider-thumb {
 
 /* Estilo para preenchimento gradativo da barra de volume */
 .volume input[type="range"]::-webkit-slider-runnable-track {
-    height: 10px;
+    height: 5px; /* Ajustado a altura */
     background: linear-gradient(to right, #ddd 0%, #ddd 100%);
     border-radius: 5px;
 }
@@ -119,37 +135,38 @@ input[type="range"]::-webkit-slider-thumb {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 15px; /* Adicionado espaçamento */
 }
 
 /* Estilos para os botões de controle */
 .controls div {
-    width: 40px;
-    height: 40px;
+    width: 30px; /* Reduzido o tamanho */
+    height: 30px; /* Reduzido o tamanho */
     background: #ddd;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 10px;
+    margin: 0 8px; /* Reduzido o espaçamento */
     cursor: pointer;
 }
 
 /* Estilos para o tempo inicial e final da música */
 .time {
     font-family: 'Poppins', sans-serif;
-    font-size: 16px;
+    font-size: 14px; /* Reduzido o tamanho */
     color: #666;
     display: inline-block;
-    width: 60px;
+    width: 50px; /* Ajustado a largura */
 }
 
 /* Estilo para o texto da porcentagem do volume */
 .volume-value {
     font-family: 'Poppins', sans-serif;
-    font-size: 14px;
+    font-size: 12px; /* Reduzido o tamanho */
     color: #333;
     position: absolute;
-    top: -25px;
+    top: -20px; /* Ajustado a posição */
     pointer-events: none;
     opacity: 0; /* Inicialmente, o texto estará invisível */
     transition: opacity 0.3s ease; /* Adiciona uma transição suave */

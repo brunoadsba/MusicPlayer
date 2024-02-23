@@ -21,7 +21,7 @@
         </nav>
         <div class="content">
             <div class="song-info">
-                <img src="img/C2.png" class="song-img">
+                <img src="img/C2.png" class="song-img" id="song-img">
                 <h1>Me faz viver</h1>
                 <p>Thalles Roberto</p>
             </div>
@@ -50,6 +50,7 @@
     let song = document.getElementById("song");
     let ctrlIcon = document.getElementById("ctrlIcon");
     let volumeDisplay = document.getElementById("volume-display");
+    let songImg = document.getElementById("song-img");
     let startTime = document.getElementById("start-time");
     let endTime = document.getElementById("end-time");
     let intervalId;
@@ -75,23 +76,26 @@
     song.onended = function() {
         ctrlIcon.classList.remove("fa-pause");
         ctrlIcon.classList.add("fa-play");
+        songImg.classList.remove("pulse-animation");
     }
 
     function playPause(){
-        if(ctrlIcon.classList.contains("fa-pause")){
-            song.pause();
-            clearInterval(intervalId);
-            ctrlIcon.classList.remove("fa-pause");
-            ctrlIcon.classList.add("fa-play");
-        }
-        else{
+        if(song.paused){
             song.volume = volume.value;
             song.play();
             intervalId = setInterval(()=>{
                 updateTimes();
             },500);
-            ctrlIcon.classList.add("fa-pause");
             ctrlIcon.classList.remove("fa-play");
+            ctrlIcon.classList.add("fa-pause");
+            songImg.classList.add("pulse-animation");
+        }
+        else{
+            song.pause();
+            clearInterval(intervalId);
+            ctrlIcon.classList.remove("fa-pause");
+            ctrlIcon.classList.add("fa-play");
+            songImg.classList.remove("pulse-animation");
         }
     }
 
